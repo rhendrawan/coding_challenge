@@ -1,10 +1,12 @@
-function reverseRecursion(string) {
-  if (string.length === 0) {
-    return '';
+function exponentialRecursion(base, power) {
+  if (power <= 0) {
+    return 1;
   } else {
-    return reverseRecursion(string.substring(1)) + string[0];
+    return base * exponentialRecursion(base, power - 1);
   }
 }
 
-console.log(reverseRecursion('hello'));
-console.log(reverseRecursion('abcd'));
+console.log(exponentialRecursion(2, 3));
+console.log(exponentialRecursion(2, 4));
+console.log(exponentialRecursion(3, 3));
+console.log(exponentialRecursion(3, 4));
