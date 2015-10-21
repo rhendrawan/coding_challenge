@@ -1,12 +1,10 @@
-function reverse(string) {
-  var result = '';
-
-  for (var i = string.length - 1; i >= 0; i--) {
-    result += string.charAt(i);
+function reverseRecursion(string) {
+  if (string.length === 0) {
+    return '';
+  } else {
+    return reverseRecursion(string.substring(1)) + string[0];
   }
-
-  return result;
 }
 
-console.log(reverse('hello'));
-
+console.log(reverseRecursion('hello'));
+console.log(reverseRecursion('abcd'));
