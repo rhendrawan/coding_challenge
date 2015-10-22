@@ -1,11 +1,20 @@
-function fibonacciRecursion(n) {
-  if (n <= 3) {
-    return 1;
-  } else {
-    return fibonacciRecursion(n-2) + fibonacciRecursion(n-1);
+function anagram(string) {
+  var result = [];
+
+  function recurse(str, remain) {
+    if (str.length === string.length) {
+      result.push(str);
+    }
+
+    for (var i = 0; i < remain.length; i++) {
+      recurse(str + remain[i], remain.slice(0, i) + remain.slice(i+1));
+    }
   }
+
+  recurse('', string);
+  return result;
 }
 
-// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
-console.log(fibonacciRecursion(5));
-console.log(fibonacciRecursion(10));
+
+
+console.log(anagram('abcd'));
