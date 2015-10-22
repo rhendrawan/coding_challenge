@@ -1,20 +1,26 @@
-function anagram(string) {
+function balanceParenthesis(string) {
   var result = [];
 
-  function recurse(str, remain) {
-    if (str.length === string.length) {
-      result.push(str);
+  for (var i = 0; i < string.length; i++) {
+    if (string.charAt(i) === '(') {
+      result.push('1');
     }
 
-    for (var i = 0; i < remain.length; i++) {
-      recurse(str + remain[i], remain.slice(0, i) + remain.slice(i+1));
+    if (string.charAt(i) === ')') {
+      if (result.pop() === undefined) {
+        return false;
+      }
     }
   }
 
-  recurse('', string);
-  return result;
+  if (result.length === 0) {
+    return true;
+  }
+
+  return false;
 }
 
-
-
-console.log(anagram('abcd'));
+console.log(balanceParenthesis("(x + y) - (4)"));   //true
+console.log(balanceParenthesis("(((10 ) ()) ((?)(:)))"));   //true
+console.log(balanceParenthesis("(50)("));   //false
+console.log(balanceParenthesis(""));    //true
