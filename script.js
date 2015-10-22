@@ -1,12 +1,11 @@
-function exponentialRecursion(base, power) {
-  if (power <= 0) {
+function fibonacciRecursion(n) {
+  if (n <= 3) {
     return 1;
   } else {
-    return base * exponentialRecursion(base, power - 1);
+    return fibonacciRecursion(n-2) + fibonacciRecursion(n-1);
   }
 }
 
-console.log(exponentialRecursion(2, 3));
-console.log(exponentialRecursion(2, 4));
-console.log(exponentialRecursion(3, 3));
-console.log(exponentialRecursion(3, 4));
+// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+console.log(fibonacciRecursion(5));
+console.log(fibonacciRecursion(10));
