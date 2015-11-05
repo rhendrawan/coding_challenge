@@ -1,37 +1,44 @@
-// Write a function that, given a string, finds the longest run of identical characters
-// and returns an array containing the start and end indices of that run.
-// If there are two runs of equal length, return the first one. Return [0,0] for no runs.
-var longestRun = function(string) {
-  var count = 0;
-  var longestCount = 0;
-  var currentStart = 0;
-  var currentEnd = 0;
-  var start = 0;
-  var end = 0;
+function mergeSort (array) {
+  var half = Math.floor(array.length/2);
+  var left = array.slice(0, half);
+  var right = array.slice(half);
 
-  for (var i = 0; i < string.length; i++) {
-    // if new character
-    if (string[i] !== string[i-1]) {
-      count = 1;
-      currentStart = i;
-      currentEnd = i;
+  if (array.length <= 1) {
+    return array;
+  }
+
+  // Sort both halves, then merge them together.
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+var merge = function(left, right) {
+  var i = 0;
+  var j = 0;
+  var result = [];
+  var remaining;
+
+  // While there is something left in both arrays to push to `result`...
+  while (i < left.length && j < right.length) {
+  // ...push the smaller of the two
+    if (left[i] < right[j]) {
+      result.push(left[i]);
+      i++;
     } else {
-    // same character as previous
-      count++;
-      currentEnd++;
-      if (longestCount < count) {
-        longestCount = count;
-        start = currentStart;
-        end = currentEnd;
-      }
+      result.push(right[j]);
+      j++;
     }
   }
 
-  return [start, end];
+  // One array is already pushed to result,
+  // so add the rest of the other array
+  if (left.length === i) {
+    remaining = right.slice(j);
+  } else {
+    remaining = left.slice(i);
+  }
+
+  return result.concat(remaining);
 };
 
-console.log(longestRun("abbbcc"));
-console.log(longestRun("aabbc"));
-console.log(longestRun(""));
-console.log(longestRun("mississippi"));
-console.log(longestRun("abcdefgh"));
+console.log(mergeSort([4, 6, 3, 8]));
+console.log(mergeSort([4,7,4,3,9,1,2]));
