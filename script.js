@@ -1,21 +1,19 @@
-// Given an arbitrary input string, return the first non-repeating character.
-// For strings with all repeats, return 'sorry'.
-var firstNonRepeatedCharacter = function(string) {
-  var letterCount = {};
-
-  for (var i = 0; i < string.length; i++) {
-    letterCount[string.charAt(i)] = letterCount[string.charAt(i)] || 0;
-    letterCount[string.charAt(i)]++;
+// A prime number is a whole number that has no other divisors other than itself
+// and 1. Write a function that accepts a number and returns true
+// if it’s a prime number, false if it’s not.
+var primeTester = function(num) {
+  if (num < 2) {
+    return false;
   }
 
-  for (i = 0; i < string.length; i++) {
-    if (letterCount[string.charAt(i)] === 1) {
-      return string[i];
+  for (var i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
     }
   }
 
-  return 'sorry';
+  return true;
 };
 
-console.log(firstNonRepeatedCharacter('ABCDBIRDUP'));
-console.log(firstNonRepeatedCharacter('XXXXXXX'));
+console.log(primeTester(2));
+console.log(primeTester(1));
