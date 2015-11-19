@@ -1,19 +1,22 @@
-// A prime number is a whole number that has no other divisors other than itself
-// and 1. Write a function that accepts a number and returns true
-// if it’s a prime number, false if it’s not.
-var primeTester = function(num) {
-  if (num < 2) {
-    return false;
-  }
+var rockPaperScissorPermutation = function(count) {
+  var result = [];
+  var plays = ['r', 'p', 's'];
 
-  for (var i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) {
-      return false;
+  function recurse(string) {
+    if (string.length === count) {
+      result.push(string);
+      return;
+    }
+
+    for (var i = 0; i < plays.length; i++) {
+      recurse(string + plays[i]);
     }
   }
 
-  return true;
+  recurse('');
+  return result;
 };
 
-console.log(primeTester(2));
-console.log(primeTester(1));
+
+console.log(rockPaperScissorPermutation(2));
+console.log(rockPaperScissorPermutation(3));
