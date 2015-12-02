@@ -1,35 +1,27 @@
-function translateRomanNumeral(roman) {
-  var DIGIT_VALUES = {
-    I: 1,
-    V: 5,
-    X: 10,
-    L: 50,
-    C: 100,
-    D: 500,
-    M: 1000
-  };
+// Write a function that rotates a NxN matrix 90 degrees clockwise.
+// A matrix, also called a 2-D array, is simply an array of arrays of values.
+function rotateMatrix (matrix)  {
+  var newArray = [];
 
-  var result = 0;
+  for (var i = 0; i< matrix.length; i++){
+    var newRow = [];
 
-  for (var i = 0; i < roman.length; i++) {
-    var curNum = DIGIT_VALUES[roman[i]];
-    var nextNum = DIGIT_VALUES[roman[i+1]];
-
-    if (curNum === undefined) {
-      return "null";
+    for (var j = 0 ; j < matrix.length ; j ++ ){
+      newRow.push(matrix[matrix.length-1-j][i]);
     }
 
-    if (nextNum && curNum < nextNum) {
-      result -= curNum;
-    } else {
-      result += curNum;
-    }
+    newArray[i] = newRow;
+    newRow = [];
   }
-
-  return result;
+  return newArray;
 }
 
-console.log(translateRomanNumeral("LX"));
-console.log(translateRomanNumeral("IV"));
-console.log(translateRomanNumeral("horse"));
-console.log(translateRomanNumeral(""));
+console.log(rotateMatrix([ [1, 2],
+[3, 4] ]));
+
+console.log(rotateMatrix([
+  [ 1, 2, 3, 4],
+  [ 5, 6, 7, 8],
+  [ 9, 'A','B', 'C'],
+  ['D','E','F','G']
+]));
