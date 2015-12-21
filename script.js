@@ -1,27 +1,42 @@
-// Write a function that rotates a NxN matrix 90 degrees clockwise.
-// A matrix, also called a 2-D array, is simply an array of arrays of values.
-function rotateMatrix (matrix)  {
-  var newArray = [];
+var spiralTraversal = function(matrix){
+  var results = [];
+  var minRow = 0;
+  var maxRow = matrix.length-1;
+  var minCol = 0;
+  var maxCol = matrix[0].length-1;
 
-  for (var i = 0; i< matrix.length; i++){
-    var newRow = [];
-
-    for (var j = 0 ; j < matrix.length ; j ++ ){
-      newRow.push(matrix[matrix.length-1-j][i]);
+  while (minRow <= maxRow && minCol <= maxCol) {
+    for (var i = minCol; i <= maxCol; i++) {
+      results.push(matrix[minRow][i]);
     }
-
-    newArray[i] = newRow;
-    newRow = [];
+    minRow++;
+    for (var j = minRow; j <= maxRow; j++) {
+      results.push(matrix[j][maxCol]);
+    }
+    maxCol--;
+    if (minRow <= maxRow) {
+      for (var k = maxCol; k >= minCol; k--) {
+        results.push(matrix[maxRow][k]);
+      }
+      maxRow--;
+    }
+    if (minCol <= maxCol) {
+      for (var m = maxRow; m >= minRow; m--) {
+        results.push(matrix[m][minCol]);
+      }
+      minCol++;
+    }
   }
-  return newArray;
-}
+  return results;
+};
 
-console.log(rotateMatrix([ [1, 2],
-[3, 4] ]));
-
-console.log(rotateMatrix([
-  [ 1, 2, 3, 4],
-  [ 5, 6, 7, 8],
-  [ 9, 'A','B', 'C'],
-  ['D','E','F','G']
-]));
+console.log(
+  spiralTraversal(
+    [ [ 1, 2, 3, 4, 5 ],
+      [ 6, 7, 8, 9, 10 ],
+      [ 11, 12, 13, 14, 15 ],
+      [ 16, 17, 18, 19, 20 ],
+      [ 21, 22, 23, 24, 25 ]
+    ]
+  )
+);
